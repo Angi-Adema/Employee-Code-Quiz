@@ -13,15 +13,33 @@
     <!-- Highscore link on the left and the timer on the right. -->
     <div class="high-score-link">
         <a href="scores.html">View Highscores</a>
+        <h1>Timer: <span id="time">0</span></h1>
     </div>
-    <div>
-    <!-- H1 title of coding quiz. -->
-    <h1>Coding Quiz</h1>
-    <!-- Paragraph of sentence of quiz instructions. This is a timed quiz, answer the folling int he time limit. Incorrect answers reduce alotted time to complete the quiz. -->
-    <p>This is a timed quiz, please answer the following questions within the allotted time limit. Incorrect answers have a penalty of reduced time by 10 seconds to complete the quiz. Good Luck!</p>
-    </div>
+    <main>
 
-    <script>src = "./script.js"</script>
+        <div id="start-container" class="box">
+            <!-- H1 title of coding quiz. -->
+            <h1>Coding Quiz</h1>
+            <!-- Paragraph of sentence of quiz instructions. This is a timed quiz, answer the folling int he time limit. Incorrect answers reduce alotted time to complete the quiz. -->
+            <p>This is a timed quiz, please answer the following questions within the allotted time limit. Incorrect
+                answers have a penalty of reduced time by 10 seconds to complete the quiz. Good Luck!</p>
+            <button id="start">Start Game</button>
+        </div>
+
+        <div id="question-container" class="hidden box">
+        </div>
+
+        <div id="final-score-container" class="hidden box">
+            <h1>Good Game</h1>
+
+            <p>your score is: <span id="final-score">0</span></p>
+
+            <p>please enter your initials: <input type="text" id="initials" /> <button id="submit">Submit</button></p>
+        </div>
+
+    </main>
+
+   <script src="./script.js"></script>
 </body>
 
 </html>
