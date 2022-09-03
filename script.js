@@ -44,10 +44,22 @@ var myQuestions = [
 function start() {
     // hide the start container and display the question container
 
-    startContainer.classList.add = 'hidden'
+    startContainer.classList.add = 'hidden';
     questionContainer.classList.remove = 'hidden';
 
+
     // start the timer
+    time = setInterval(function() {
+        timeCount--;
+        timerEl.textContent = timeCount;
+        if (timeCount > 0) {
+        //Need to build in penalty if answer incorrectly
+        }
+        // if time reaches zero, quiz needs to end.
+        if (timeCount === 0) {
+            clearInterval(time);
+        }, 1000
+    }) 
 
 
     // run a function that will show your questions
@@ -57,18 +69,23 @@ function start() {
 function displayQuestion() {
     // need to create the elements that will go in the question container
 
+
     //need to add the content from the current question
+    setNextQuestion();
 
     //need to create the container to house the button choices.
 
     //need to loop the array of choices
+    for (var i = 0; i < myQuestions.length; i++) {
 
-    //need to creat the buttons and add the content and event listenter  to the buttons
+    }
+
+    //need to create the buttons and add the content and event listenter to the buttons
 
     //need to append the buttons to the button container
 
 
-    //need to append all create element to the question container. 
+    //need to append all create elements to the question container. 
 }
 
 // create function that will tie to the button event listener. to check the answer clicked.
