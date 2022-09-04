@@ -44,22 +44,23 @@ var myQuestions = [
 function start() {
     // hide the start container and display the question container
 
-    startContainer.classList.add = 'hidden';
-    questionContainer.classList.remove = 'hidden';
+    startContainer.classList.add('hidden');
+    questionContainer.classList.remove('hidden');
 
-
+    timerEl.textContent = time;
     // start the timer
-    time = setInterval(function() {
-        timeCount--;
-        timerEl.textContent = timeCount;
-        if (timeCount > 0) {
-        //Need to build in penalty if answer incorrectly
+    timerId = setInterval(function () {
+        time--;
+        timerEl.textContent = time;
+        if (time > 0) {
+            //Need to build in penalty if answer incorrectly
         }
         // if time reaches zero, quiz needs to end.
-        if (timeCount === 0) {
-            clearInterval(time);
-        }, 1000
-    }) 
+        if (time === 0) {
+            clearInterval(timerId);
+        }
+
+    }, 1000)
 
 
     // run a function that will show your questions
@@ -67,29 +68,49 @@ function start() {
 }
 
 function displayQuestion() {
+    var currenQuestionObj = myQuestions[questionArrayIndex]
     // need to create the elements that will go in the question container
-
+    var questionTitleEl = document.createElement('h2');
 
     //need to add the content from the current question
-    setNextQuestion();
+    questionTitleEl.textContent = currenQuestionObj.question;
 
     //need to create the container to house the button choices.
+    var questionChoiceContainer = document.createElement('div');
 
     //need to loop the array of choices
-    for (var i = 0; i < myQuestions.length; i++) {
-
+    for (var i = 0; i < currenQuestionObj.options.length; i++) {
+        //need to create the buttons and add the content and event listenter to the buttons
+        var choicesBtn = document.createElement('button');
+        choicesBtn.textContent = currenQuestionObj.options[i];
+        choicesBtn.setAttribute('value', currenQuestionObj.options[i] )
+        //need to append the buttons to the button container
+        choicesBtn.addEventListener('click', results);
+        questionChoiceContainer.append(choicesBtn)
     }
 
-    //need to create the buttons and add the content and event listenter to the buttons
-
-    //need to append the buttons to the button container
-
-
     //need to append all create elements to the question container. 
+    questionContainer.append(questionTitleEl, questionChoiceContainer)
 }
 
 // create function that will tie to the button event listener. to check the answer clicked.
+function results(e) {
+console.log(e.target.value)
 
+// when the user selects the wrong answer we need to deduct 5 from the time
+
+// make sure to diplay the updated time to the screen
+
+// increase the question array index by one
+
+// if we have more questions left we need to ask the displayQuestion() function again if not the game is over if there are no more questions the game is over
+
+}
+
+
+// create a game over function
+
+// the game over function needs to hide the question container and display the final score container.
 
 
 //Event listener to start the quiz.
