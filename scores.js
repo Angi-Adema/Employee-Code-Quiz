@@ -1,3 +1,5 @@
+var highscores = JSON.parse(localStorage.getItem('highscores')) || []
+
 
 
 // Event listener to clear the score.

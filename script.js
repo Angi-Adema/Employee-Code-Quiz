@@ -3,7 +3,7 @@ var startContainer = document.getElementById('start-container');
 var startBtn = document.getElementById('start');
 var questionContainer = document.getElementById('question-container');
 var finalScoreContainer = document.getElementById('final-score-container');
-var finalScoreEl = document.getElementById('finalScore');
+var finalScoreEl = document.getElementById('final-score');
 var initialsEl = document.getElementById('initials');
 var submitBtn = document.getElementById('submit');
 
@@ -52,13 +52,8 @@ function start() {
     timerId = setInterval(function () {
         time--;
         timerEl.textContent = time;
-        if (time > 0) {
-            //Need to build in penalty if answer incorrectly
-        }
-        // if time reaches zero, quiz needs to end.
-        if (time === 0) {
-            clearInterval(timerId);
-        }
+
+
 
     }, 1000)
 
@@ -68,6 +63,7 @@ function start() {
 }
 
 function displayQuestion() {
+    questionContainer.innerHTML = ''
     var currenQuestionObj = myQuestions[questionArrayIndex]
     // need to create the elements that will go in the question container
     var questionTitleEl = document.createElement('h2');
@@ -83,7 +79,7 @@ function displayQuestion() {
         //need to create the buttons and add the content and event listenter to the buttons
         var choicesBtn = document.createElement('button');
         choicesBtn.textContent = currenQuestionObj.options[i];
-        choicesBtn.setAttribute('value', currenQuestionObj.options[i] )
+        choicesBtn.setAttribute('value', currenQuestionObj.options[i])
         //need to append the buttons to the button container
         choicesBtn.addEventListener('click', results);
         questionChoiceContainer.append(choicesBtn)
@@ -95,23 +91,61 @@ function displayQuestion() {
 
 // create function that will tie to the button event listener. to check the answer clicked.
 function results(e) {
-console.log(e.target.value)
 
-// when the user selects the wrong answer we need to deduct 5 from the time
+    // when the user selects the wrong answer we need to deduct 5 from the time
+    if (e.target.value !== myQuestions[questionArrayIndex].answer) {
+        time -= 5;
+        // make sure to diplay the updated time to the screen
+        timerEl.textContent = time;
+    }
 
-// make sure to diplay the updated time to the screen
 
-// increase the question array index by one
+    // increase the question array index by one
+    questionArrayIndex++;
 
-// if we have more questions left we need to ask the displayQuestion() function again if not the game is over if there are no more questions the game is over
+    // if we have more questions left we need to ask the displayQuestion() function again if not the game is over if there are no more questions the game is over
+    if (time === 0 || questionArrayIndex === myQuestions.length) {
+        quizOver();
+    } else {
+        displayQuestion()
+    }
+}
 
+function quizOver() {
+    clearInterval(timerId);
+    // create a game over function
+    // the game over function needs to hide the question container and display the final score container.
+    questionContainer.classList.add('hidden');
+    finalScoreContainer.classList.remove('hidden');
+    finalScoreEl.textContent = time;
 }
 
 
-// create a game over function
+function scoreRecord() {
+    // how will we save the initials and the score together. 
+    var initials = initialsEl.value.trim();
 
-// the game over function needs to hide the question container and display the final score container.
+    if (initials !== '') {
 
+        var highscores = JSON.parse(localStorage.getItem('highscores')) || []
+
+        var userRecord = {
+            initials: initials,
+            score: time
+        }
+
+        highscores.push(userRecord)
+
+        localStorage.setItem('highscores',JSON.stringify(highscores))
+
+        window.location.href = 'scores.html'
+    }
+
+
+    // how will we store all the scores from multiple players in local storage
+}
 
 //Event listener to start the quiz.
 startBtn.addEventListener('click', start)
+
+submitBtn.addEventListener('click', scoreRecord)
