@@ -10,11 +10,16 @@
 
 <body>
     <header>
-        <a href="./index.html"><button>play again</button></a>
+        <a href="./index.html"><button type="button">play again</button></a>
     </header>
     
-    <main>
-        <ol id="scores"></ol>
+    <main class="scores-container">
+        <h1>Highscores</h1>
+        <div class="scores-list">
+           <ol id="scores"></ol> 
+        </div>
+        
+        <button type="button"id="clear-scores">Clear Highscores</button>
     </main>
 
 

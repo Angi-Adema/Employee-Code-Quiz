@@ -1,3 +1,23 @@
 .hidden{
     display: none
 }
+
+.scores-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scores-container h1{
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+.scores-list{
+    margin:3px;
+    padding:5px;
+  
+}
+
+li{
+    font-weight: bold;
+}
