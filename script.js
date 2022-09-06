@@ -52,7 +52,10 @@ function start() {
     timerId = setInterval(function () {
         time--;
         timerEl.textContent = time;
-
+    
+        if (time <= 0) {
+            quizOver();
+        }
 
 
     }, 1000)
