@@ -21,3 +21,18 @@
 li{
     font-weight: bold;
 }
+
+#clear-scores{
+    background: purple;
+    color: white;
+}
+
+button:hover{
+    opacity: 75%;
+    
+}
+
+button{
+    background: purple;
+    color: white;
+}
